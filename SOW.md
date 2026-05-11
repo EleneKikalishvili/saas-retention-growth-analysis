@@ -35,7 +35,7 @@ Despite steady account growth, the business faces elevated churn and uneven reve
 |---|---|
 | Active subscription | `end_date` is null in subscriptions |
 | Active MRR | Sum of `mrr_amount` for active subscriptions only |
-| Churned account | `accounts.churn_flag == True` |
+| Churned account | Account whose most recent subscription record has a non-null `end_date` |
 | Trial-to-paid conversion | Trial account with at least one non-trial subscription record |
 | Churn rate | Churned accounts / total accounts |
 | Customer LTV | `mrr_amount × tenure_months` where tenure = months from signup to churn or current date |
@@ -70,14 +70,14 @@ Despite steady account growth, the business faces elevated churn and uneven reve
 
 | Issue | Decision |
 |---|---|
-| `end_date` nulls in subscriptions (4,514 rows) | Null = active subscription — authoritative definition of active MRR |
-| `satisfaction_score` nulls in support_tickets (825 rows) | Null = no survey response — excluded from averages automatically by pandas `.mean()` |
-| `feedback_text` nulls in churn_events (148 rows) | Null = no written feedback — expected for optional free text field |
+| `end_date` nulls in subscriptions (4,514 rows) | Null = active subscription - authoritative definition of active MRR |
+| `satisfaction_score` nulls in support_tickets (825 rows) | Null = no survey response - excluded from averages automatically by pandas `.mean()` |
+| `feedback_text` nulls in churn_events (148 rows) | Null = no written feedback - expected for optional free text field |
 | Accounts with multiple subscriptions | Most recent subscription used for account-level analysis, identified by `start_date` descending |
-| `churn_flag` in both accounts and subscriptions | `accounts.churn_flag` is authoritative for account-level churn analysis; `subscriptions.churn_flag` used for subscription-level analysis only |
-| `is_reactivation == True` in churn_events (61 rows) | Reported separately — not merged into primary churn rate to avoid double-counting |
-| Beta features `is_beta_feature == True` (2,544 rows) | Reported separately — not excluded from overall usage totals |
-| Duplicate `usage_id` values (21 pairs, 42 rows) | ID generation collisions confirmed — all rows retained; `usage_id` not used as a merge key |
+| `churn_flag` in both accounts and subscriptions | `accounts.churn_flag` is unreliable - all 110 accounts marked as churned have active subscriptions (flag never reset after reactivation), and 33 genuinely churned accounts show `churn_flag = False`. Neither flag is used as the authoritative churn indicator. Current churn is defined via subscription-based logic |
+| `is_reactivation == True` in churn_events (61 rows) | Reported separately - not merged into primary churn rate to avoid double-counting |
+| Beta features `is_beta_feature == True` (2,544 rows) | Reported separately - not excluded from overall usage totals |
+| Duplicate `usage_id` values (21 pairs, 42 rows) | ID generation collisions confirmed - all rows retained; `usage_id` not used as a merge key |
 | Discrepancy between churn_events (352 unique accounts) and accounts.churn_flag (110 churned) | Explained by accounts that churned multiple times or reactivated. `churn_events` is the historical log; `accounts.churn_flag` reflects current status only |
 
 ---
