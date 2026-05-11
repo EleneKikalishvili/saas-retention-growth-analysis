@@ -70,15 +70,15 @@ Despite steady account growth, the business faces elevated churn and uneven reve
 
 | Issue | Decision |
 |---|---|
-| Null `end_date` in subscriptions | Treated as active subscription - authoritative definition of active MRR |
-| Null `satisfaction_score` in support_tickets | Excluded from averages - treated as no survey response (41% of tickets) |
+| `end_date` nulls in subscriptions (4,514 rows) | Null = active subscription — authoritative definition of active MRR |
+| `satisfaction_score` nulls in support_tickets (825 rows) | Null = no survey response — excluded from averages automatically by pandas `.mean()` |
+| `feedback_text` nulls in churn_events (148 rows) | Null = no written feedback — expected for optional free text field |
 | Accounts with multiple subscriptions | Most recent subscription used for account-level analysis, identified by `start_date` descending |
-| Null `refund_amount_usd` in churn_events | Treated as USD 0 refund |
 | `churn_flag` in both accounts and subscriptions | `accounts.churn_flag` is authoritative for account-level churn analysis; `subscriptions.churn_flag` used for subscription-level analysis only |
-| `is_reactivation == True` in churn_events | Reported separately - not merged into primary churn rate to avoid double-counting |
-| Beta features (`is_beta_feature == True`) | Reported separately - not excluded from overall usage totals |
-| Duplicate `usage_id` values (21 pairs, 42 rows) | ID generation collisions confirmed - all other fields differ between pairs indicating distinct events. All rows retained; `usage_id` not used as a merge key |
-| Discrepancy between churn_events (352 unique accounts) and accounts.churn_flag (110 currently churned) | Explained by accounts that churned multiple times or reactivated. `churn_events` is the historical log; `accounts.churn_flag` reflects current status only |
+| `is_reactivation == True` in churn_events (61 rows) | Reported separately — not merged into primary churn rate to avoid double-counting |
+| Beta features `is_beta_feature == True` (2,544 rows) | Reported separately — not excluded from overall usage totals |
+| Duplicate `usage_id` values (21 pairs, 42 rows) | ID generation collisions confirmed — all rows retained; `usage_id` not used as a merge key |
+| Discrepancy between churn_events (352 unique accounts) and accounts.churn_flag (110 churned) | Explained by accounts that churned multiple times or reactivated. `churn_events` is the historical log; `accounts.churn_flag` reflects current status only |
 
 ---
 
