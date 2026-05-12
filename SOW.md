@@ -20,7 +20,7 @@ Despite steady account growth, the business faces elevated churn and uneven reve
 
 | # | Question | Theme |
 |---|---|---|
-| Q1 | Which customer segments generate the highest long-term revenue, and which expand their contracts over time? | Revenue & Expansion |
+| Q1 | Which customer segments generate the highest revenue and long-term value? | Revenue |
 | Q2 | Which referral sources and industries produce the highest-value customers, measured by LTV, MRR, and churn rate? | Acquisition Quality |
 | Q3 | What does the journey from trial → upgrade → churn look like, and where does revenue expand or collapse? | Lifecycle |
 | Q4 | Which features drive product value, and do engaged users retain better? | Product |
@@ -79,7 +79,10 @@ Despite steady account growth, the business faces elevated churn and uneven reve
 | Beta features `is_beta_feature == True` (2,544 rows) | Reported separately - not excluded from overall usage totals |
 | Duplicate `usage_id` values (21 pairs, 42 rows) | ID generation collisions confirmed - all rows retained; `usage_id` not used as a merge key |
 | Discrepancy between churn_events (352 unique accounts) and accounts.churn_flag (110 churned) | Explained by accounts that churned multiple times or reactivated. `churn_events` is the historical log; `accounts.churn_flag` reflects current status only |  
-| Trial-to-paid conversion rate | 100% conversion confirmed across all channels - synthetic data artifact. Q2 revised to focus on customer value by acquisition channel instead. |
+| Trial-to-paid conversion rate | 100% conversion confirmed across all channels - synthetic data artifact. Q2 revised to focus on customer value by acquisition channel instead. |  
+| `upgrade_flag` and `downgrade_flag` in subscriptions | Flags are unreliable - inconsistently assigned in synthetic data. Expansion behavior derived directly from consecutive plan tier comparisons in subscription history instead. |  
+| Net plan expansion/contraction rates | Perfectly balanced at 33.2% each - confirmed synthetic data artifact. Expansion behavior excluded from Q1 analysis as results are not analytically meaningful. |
+| Subscription history plan movements | Accounts show unrealistic back-and-forth between plan tiers (e.g. 4 upgrades and 4 downgrades for a single account). Reflects random data generation rather than realistic customer behavior. | 
 
 ---
 
