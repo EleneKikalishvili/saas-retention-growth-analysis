@@ -23,9 +23,9 @@ Despite steady account growth, the business faces elevated churn and uneven reve
 | Q1 | Which customer segments generate the highest revenue and long-term value? | Revenue |
 | Q2 | Which customer segments - by referral source and industry - show the highest churn rates, and what does this reveal about acquisition quality? | Acquisition Quality |
 | Q3 | What does the journey from trial → upgrade → churn look like, and where does revenue expand or collapse? | Lifecycle |
-| Q4 | Which features drive product value, and do engaged users retain better? | Product |
+| Q4 | Which features drive the most product engagement, and how are beta features being adopted across customer segments? | Product |
 | Q5 | Which support experience patterns are associated with increased churn risk? | Support |
-| Q6 | How do different signup cohorts retain and expand over time? | Retention |
+| Q6 | How do different signup cohorts retain over time? | Retention |
 
 ---
 
