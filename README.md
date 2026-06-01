@@ -30,7 +30,11 @@ This project delivers a full analytical report answering six business questions 
 
 The analysis surfaces four decisions the business can act on: churn is concentrated in the first 90 days (42% of all churn), acquisition channel predicts churn more strongly than plan tier, support escalations are the clearest early-warning signal of churn, and revenue is heavily concentrated in a small number of high-value Enterprise accounts. Together these point to where RavenStack should focus retention investment as it scales.  
 
-**Full analysis:** [`ravenstack_analysis.ipynb`](ravenstack_analysis.ipynb) &nbsp;|&nbsp; **Project scope:** [`SOW.md`](SOW.md)
+**Full analysis:** [`ravenstack_analysis.ipynb`](ravenstack_analysis.ipynb) &nbsp;|&nbsp; **Project scope:** [`SOW.md`](SOW.md)  
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EleneKikalishvili/saas-retention-growth-analysis/blob/main/ravenstack_analysis.ipynb)  
+
+*If the notebook doesn't render here on GitHub, you can open it in Google Colab using the badge above, or download it to view locally.*
 
 > *This is a portfolio project built on a synthetic dataset. The business scenario is framed as real to demonstrate stakeholder-facing analytical work; data limitations are documented transparently in [Scope, Decisions & Limitations](#scope-decisions--limitations).*  
 
