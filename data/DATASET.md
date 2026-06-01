@@ -1,32 +1,32 @@
-\# RavenStack: Synthetic SaaS Dataset (Multi-Table)
+# RavenStack: Synthetic SaaS Dataset (Multi-Table)
 
 
 
-\*\*Author:\*\* River @ Rivalytics  
+**Author:** River @ Rivalytics  
 
-\*\*Credit Requirement:\*\* You may use or remix this dataset for educational or portfolio purposes, but please credit the original author.  
+**Credit Requirement:** You may use or remix this dataset for educational or portfolio purposes, but please credit the original author.  
 
-\*\*Blog:\*\* \[Building a Dataset Generator App Journey](https://rivalytics.medium.com)  
+**Blog:** [Building a Dataset Generator App Journey](https://rivalytics.medium.com)  
 
-\*\*License:\*\* MIT-like (fully synthetic, no PII)  
+**License:** MIT-like (fully synthetic, no PII)  
 
-\*\*Refresh Interval:\*\* Monthly  
+**Refresh Interval:** Monthly  
 
-\*\*Complexity:\*\* Capstone-level (multi-table, event-driven, time-sensitive)  
+**Complexity:** Capstone-level (multi-table, event-driven, time-sensitive)  
 
-\*\*Data Format:\*\* CSV  
+**Data Format:** CSV  
 
-\*\*Row Volume:\*\*
+**Row Volume:**
 
-\- accounts – 500
+- accounts - 500
 
-\- subscriptions – 5,000
+- subscriptions - 5,000
 
-\- feature\_usage – 25,000
+- feature_usage - 25,000
 
-\- support\_tickets – 2,000
+- support_tickets - 2,000
 
-\- churn\_events – 600
+- churn_events - 600
 
 
 
@@ -34,7 +34,7 @@
 
 
 
-\## Scenario
+## Scenario
 
 
 
@@ -46,59 +46,23 @@ You're investigating RavenStack, a stealth-mode SaaS startup delivering AI-drive
 
 
 
-\## How This Dataset Was Generated
+## How This Dataset Was Generated
 
 
 
-\- Scripted in Python using pandas, numpy, and uuid
+- Scripted in Python using pandas, numpy, and uuid
 
-\- Temporal logic: Validated date ranges (e.g., signup ≤ subscription ≤ churn)
+- Temporal logic: Validated date ranges (e.g., signup ≤ subscription ≤ churn)
 
-\- Statistical realism: Exponential and Poisson distributions for seats, usage, and durations
+- Statistical realism: Exponential and Poisson distributions for seats, usage, and durations
 
-\- Primary \& foreign keys: All tables link properly; no orphans
+- Primary & foreign keys: All tables link properly; no orphans
 
-\- Edge cases: Mid-cycle plan changes, null fields, reactivations, duplicate referrals, beta feature spikes
+- Edge cases: Mid-cycle plan changes, null fields, reactivations, duplicate referrals, beta feature spikes
 
-\- Nulls included: Satisfaction scores, feature usage, churn feedback
+- Nulls included: Satisfaction scores, feature usage, churn feedback
 
-\- Fully synthetic: All names, domains, feedback, and data are generated
-
-
-
----
-
-
-
-\## Table Relationships
-
-
-
-accounts (PK: account\_id)
-
-│
-
-├── subscriptions (FK → accounts.account\_id)
-
-│ └── feature\_usage (FK → subscriptions.subscription\_id)
-
-│
-
-├── support\_tickets (FK → accounts.account\_id)
-
-└── churn\_events (FK → accounts.account\_id)
-
-
-
-pgsql
-
-Copy
-
-Edit
-
-
-
-All account\_id and subscription\_id links are referentially complete.
+- Fully synthetic: All names, domains, feedback, and data are generated
 
 
 
@@ -106,147 +70,116 @@ All account\_id and subscription\_id links are referentially complete.
 
 
 
-\## Table Schemas
+## Table Relationships
 
 
 
-\### accounts.csv
+```
+accounts (PK: account_id)
+│
+├── subscriptions (FK → accounts.account_id)
+│   └── feature_usage (FK → subscriptions.subscription_id)
+│
+├── support_tickets (FK → accounts.account_id)
+└── churn_events (FK → accounts.account_id)
+```
+
+
+
+All account_id and subscription_id links are referentially complete.
+
+
+
+---
+
+
+
+## Table Schemas
+
+
+
+### accounts.csv
 
 | Column         | Type       | Description                                |
-
 |----------------|------------|--------------------------------------------|
-
-| account\_id     | ID         | Unique customer (primary key)              |
-
-| account\_name   | string     | Fictional company name                     |
-
+| account_id     | ID         | Unique customer (primary key)              |
+| account_name   | string     | Fictional company name                     |
 | industry       | categorical| SaaS vertical (e.g., DevTools, EdTech)     |
-
 | country        | string     | ISO-2 country code                         |
-
-| signup\_date    | date       | Account creation date                      |
-
-| referral\_source| categorical| organic, ads, event, partner, other        |
-
-| plan\_tier      | categorical| Initial plan (Basic, Pro, Enterprise)      |
-
+| signup_date    | date       | Account creation date                      |
+| referral_source| categorical| organic, ads, event, partner, other        |
+| plan_tier      | categorical| Initial plan (Basic, Pro, Enterprise)      |
 | seats          | integer    | Licensed user count                        |
-
-| is\_trial       | boolean    | Currently trialing                         |
-
-| churn\_flag     | boolean    | Churned at any point                       |
+| is_trial       | boolean    | Currently trialing                         |
+| churn_flag     | boolean    | Churned at any point                       |
 
 
 
-\### subscriptions.csv
+### subscriptions.csv
 
 | Column           | Type       | Description                            |
-
 |------------------|------------|----------------------------------------|
-
-| subscription\_id  | ID         | Unique subscription (primary key)      |
-
-| account\_id       | ID (FK)    | Links to accounts.account\_id           |
-
-| start\_date       | date       | Subscription start                     |
-
-| end\_date         | date       | Nullable for active plans              |
-
-| plan\_tier        | categorical| Plan at time of billing                |
-
+| subscription_id  | ID         | Unique subscription (primary key)      |
+| account_id       | ID (FK)    | Links to accounts.account_id           |
+| start_date       | date       | Subscription start                     |
+| end_date         | date       | Nullable for active plans              |
+| plan_tier        | categorical| Plan at time of billing                |
 | seats            | integer    | Licensed seats                         |
-
-| mrr\_amount       | currency   | Monthly revenue                        |
-
-| arr\_amount       | currency   | Annual revenue                         |
-
-| is\_trial         | boolean    | Trial status                           |
-
-| upgrade\_flag     | boolean    | Plan upgraded mid-cycle                |
-
-| downgrade\_flag   | boolean    | Plan downgraded mid-cycle              |
-
-| churn\_flag       | boolean    | True if ended                          |
-
-| billing\_frequency| categorical| monthly or annual                      |
-
-| auto\_renew\_flag  | boolean    | 80% true                               |
+| mrr_amount       | currency   | Monthly revenue                        |
+| arr_amount       | currency   | Annual revenue                         |
+| is_trial         | boolean    | Trial status                           |
+| upgrade_flag     | boolean    | Plan upgraded mid-cycle                |
+| downgrade_flag   | boolean    | Plan downgraded mid-cycle              |
+| churn_flag       | boolean    | True if ended                          |
+| billing_frequency| categorical| monthly or annual                      |
+| auto_renew_flag  | boolean    | 80% true                               |
 
 
 
-\### feature\_usage.csv
+### feature_usage.csv
 
 | Column           | Type       | Description                            |
-
 |------------------|------------|----------------------------------------|
-
-| usage\_id         | ID         | Unique usage event                     |
-
-| subscription\_id  | ID (FK)    | Links to subscriptions.subscription\_id |
-
-| usage\_date       | date       | Date of usage                          |
-
-| feature\_name     | categorical| From pool of 40 SaaS features          |
-
-| usage\_count      | integer    | Event frequency                        |
-
-| usage\_duration\_secs | integer | Time spent                             |
-
-| error\_count      | integer    | Logged errors                          |
-
-| is\_beta\_feature  | boolean    | 10% flagged as beta                    |
+| usage_id         | ID         | Unique usage event                     |
+| subscription_id  | ID (FK)    | Links to subscriptions.subscription_id |
+| usage_date       | date       | Date of usage                          |
+| feature_name     | categorical| From pool of 40 SaaS features          |
+| usage_count      | integer    | Event frequency                        |
+| usage_duration_secs | integer | Time spent                             |
+| error_count      | integer    | Logged errors                          |
+| is_beta_feature  | boolean    | 10% flagged as beta                    |
 
 
 
-\### support\_tickets.csv
+### support_tickets.csv
 
 | Column                  | Type       | Description                          |
-
 |-------------------------|------------|--------------------------------------|
-
-| ticket\_id               | ID         | Unique ticket                        |
-
-| account\_id              | ID (FK)    | Links to accounts.account\_id         |
-
-| submitted\_at            | datetime   | Time opened                          |
-
-| closed\_at               | datetime   | Time resolved                        |
-
-| resolution\_time\_hours   | float      | Duration                             |
-
+| ticket_id               | ID         | Unique ticket                        |
+| account_id              | ID (FK)    | Links to accounts.account_id         |
+| submitted_at            | datetime   | Time opened                          |
+| closed_at               | datetime   | Time resolved                        |
+| resolution_time_hours   | float      | Duration                             |
 | priority                | categorical| low, medium, high, urgent            |
-
-| first\_response\_time\_minutes | integer| Minutes to first response            |
-
-| satisfaction\_score      | integer    | 1–5 (null = no response)             |
-
-| escalation\_flag         | boolean    | True if escalated                    |
+| first_response_time_minutes | integer| Minutes to first response            |
+| satisfaction_score      | integer    | 1-5 (null = no response)             |
+| escalation_flag         | boolean    | True if escalated                    |
 
 
 
-\### churn\_events.csv
+### churn_events.csv
 
 | Column              | Type       | Description                           |
-
 |---------------------|------------|---------------------------------------|
-
-| churn\_event\_id      | ID         | Unique churn instance                 |
-
-| account\_id          | ID (FK)    | Links to accounts.account\_id          |
-
-| churn\_date          | date       | When account left                     |
-
-| reason\_code         | categorical| pricing, support, features, etc.      |
-
-| refund\_amount\_usd   | currency   | $0 default, 25% have credit/refund    |
-
-| preceding\_upgrade\_flag| boolean | Had upgrade within 90 days             |
-
-| preceding\_downgrade\_flag| boolean| Had downgrade within 90 days          |
-
-| is\_reactivation     | boolean    | 10% were previously churned           |
-
-| feedback\_text       | string     | Optional customer comment             |
+| churn_event_id      | ID         | Unique churn instance                 |
+| account_id          | ID (FK)    | Links to accounts.account_id          |
+| churn_date          | date       | When account left                     |
+| reason_code         | categorical| pricing, support, features, etc.      |
+| refund_amount_usd   | currency   | $0 default, 25% have credit/refund    |
+| preceding_upgrade_flag| boolean | Had upgrade within 90 days             |
+| preceding_downgrade_flag| boolean| Had downgrade within 90 days          |
+| is_reactivation     | boolean    | 10% were previously churned           |
+| feedback_text       | string     | Optional customer comment             |
 
 
 
@@ -254,21 +187,21 @@ All account\_id and subscription\_id links are referentially complete.
 
 
 
-\## Suggested Projects
+## Suggested Projects
 
 
 
-\- Churn prediction using subscriptions + support data
+- Churn prediction using subscriptions + support data
 
-\- Feature adoption tracking during beta phases
+- Feature adoption tracking during beta phases
 
-\- Support workload forecasting
+- Support workload forecasting
 
-\- Revenue cohort analysis by referral channel
+- Revenue cohort analysis by referral channel
 
-\- Plan tier upgrade funnel by industry
+- Plan tier upgrade funnel by industry
 
-\- Latency analysis by seat count and plan tier
+- Latency analysis by seat count and plan tier
 
 
 
@@ -276,13 +209,13 @@ All account\_id and subscription\_id links are referentially complete.
 
 
 
-\## Licensing
+## Licensing
 
 
 
 This dataset is fully synthetic and distributed under a permissive MIT-like license.  
 
-You may use or remix it for learning, research, or portfolio purposes, but \*\*you must credit the dataset author: River @ Rivalytics.\*\*
+You may use or remix it for learning, research, or portfolio purposes, but **you must credit the dataset author: River @ Rivalytics.**
 
 
 
