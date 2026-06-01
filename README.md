@@ -1,7 +1,7 @@
 # RavenStack: SaaS Retention & Growth Analysis
 ### End-to-End Customer & Revenue Analysis in Python
 
-**Analyst:** Elene Kikalishvili &nbsp;|&nbsp; **Language:** Python (pandas) &nbsp;|&nbsp; **Visualization:** matplotlib, seaborn &nbsp;|&nbsp; **Environment:** Jupyter Notebook
+**Analyst:** Elene Kikalishvili &nbsp;|&nbsp; **Language:** Python (pandas) &nbsp;|&nbsp; **Visualization:** matplotlib, seaborn &nbsp;|&nbsp; **Environment:** Jupyter Notebook  
 **Last updated:** May 2026
 
 ---
@@ -28,13 +28,11 @@ RavenStack is a stealth-mode B2B SaaS startup preparing for public launch. After
 
 This project delivers a full analytical report answering six business questions spanning revenue concentration, acquisition quality, customer lifecycle, support experience, product engagement, and cohort retention. Working across a fully relational five-table dataset, the analysis rebuilds churn logic from raw subscription records, validates every metric in code before it appears in commentary, and frames each finding for a named business stakeholder.
 
-The analysis surfaces four decisions the business can act on: churn is concentrated in the first 90 days (42% of all churn), acquisition channel predicts churn more strongly than plan tier, support escalations are the clearest early-warning signal of churn, and revenue is heavily concentrated in a small number of high-value Enterprise accounts. Together these point to where RavenStack should focus retention investment as it scales.
-
-> *This is a portfolio project built on a synthetic dataset. The business scenario is framed as real to demonstrate stakeholder-facing analytical work; data limitations are documented transparently in [Scope, Decisions & Limitations](#scope-decisions--limitations).*
-
-![Cohort Retention Heatmap](images/cohort_retention_heatmap.png)
+The analysis surfaces four decisions the business can act on: churn is concentrated in the first 90 days (42% of all churn), acquisition channel predicts churn more strongly than plan tier, support escalations are the clearest early-warning signal of churn, and revenue is heavily concentrated in a small number of high-value Enterprise accounts. Together these point to where RavenStack should focus retention investment as it scales.  
 
 **Full analysis:** [`ravenstack_analysis.ipynb`](ravenstack_analysis.ipynb) &nbsp;|&nbsp; **Project scope:** [`SOW.md`](SOW.md)
+
+> *This is a portfolio project built on a synthetic dataset. The business scenario is framed as real to demonstrate stakeholder-facing analytical work; data limitations are documented transparently in [Scope, Decisions & Limitations](#scope-decisions--limitations).*  
 
 ---
 
@@ -170,11 +168,19 @@ Of five support metrics compared between churned and active accounts, **escalati
 
 > **Recommendation:** Treat an escalated ticket as a churn-risk trigger - route any escalation to proactive Customer Success outreach within 24 hours.
 
-### Beta adoption is universal; early cohorts retain best
+### Beta adoption is universal across all segments
 
-Beta feature adoption is near-universal at **98.4%** across all segments, with no resistant group - a positive signal for general availability rollouts. RavenStack's earliest cohorts also retain best (2023Q1 at 100% through 18-24 months), making it a priority to maintain that retention quality across newer acquisition channels.
+Beta feature adoption is near-universal at **98.4%** across all 500 accounts, with no meaningful variation by plan tier or industry. There is no resistant segment - a positive signal for general availability rollouts ahead of public launch.
 
-> **Recommendation:** Proceed with beta feature general availability, and monitor whether newer signup cohorts retain as well as the early pilot cohorts as acquisition scales.
+> **Recommendation:** Proceed with beta feature general availability. Adoption is broad and shows no segment friction.
+
+### Earliest cohorts retain best
+
+RavenStack's earliest signup cohorts retain most strongly - 2023Q1 retains 100% of accounts through 18-24 months, and 2023Q2 retains 98.1% at the same milestone. As acquisition scales across new channels and industries ahead of public launch, maintaining this retention quality is the defining retention challenge.
+
+![Cohort Retention Heatmap](images/cohort_retention_heatmap.png)
+
+> **Recommendation:** Monitor whether newer signup cohorts retain as well as the early pilot cohorts as acquisition scales - early cohort retention should not be assumed to carry forward.
 
 ---
 
