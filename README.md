@@ -1,7 +1,8 @@
 # RavenStack: SaaS Retention & Growth Analysis
 ### End-to-End Customer & Revenue Analysis in Python
 
-**Analyst:** Elene Kikalishvili &nbsp;|&nbsp; **Language:** Python (pandas) &nbsp;|&nbsp; **Visualization:** matplotlib, seaborn &nbsp;|&nbsp; **Environment:** Jupyter Notebook  
+**Language:** Python (pandas) &nbsp;|&nbsp; **Visualization:** matplotlib, seaborn &nbsp;|&nbsp; **Environment:** Jupyter Notebook  
+**Analyst:** Elene Kikalishvili  
 **Last updated:** May 2026
 
 ---
